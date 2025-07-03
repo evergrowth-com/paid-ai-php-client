@@ -10,7 +10,7 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final readonly class PaidAiApiClient
+final readonly class PaidAiApiClient implements PaidAiApiClientInterface
 {
     private const string DEFAULT_URL = 'https://api.agentpaid.io';
 
@@ -34,8 +34,7 @@ final readonly class PaidAiApiClient
     }
 
     /**
-     * @param non-empty-array<Signal> $signals
-     * @throws PaidAiPhpClientException
+     * {@inheritdoc}
      */
     public function flush(array $signals): void
     {
