@@ -1,0 +1,13 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+    level: 8
+    fileExtensions:
+        - php
+    paths:
+        - src/
+        - tests/
+    ignoreErrors:
+        -
+            identifier: 'missingType.iterableValue'

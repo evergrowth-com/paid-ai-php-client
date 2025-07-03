@@ -1,0 +1,47 @@
+{
+    "name": "evergrowth/paid-ai-php-client",
+    "description": "paid.ai php client",
+    "license": "proprietary",
+    "type": "library",
+    "require": {
+        "php": "^8.3",
+        "symfony/http-client": "^7.2"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^12.2",
+        "slevomat/coding-standard": "^8.19",
+        "squizlabs/php_codesniffer": "^3.13"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Evergrowth\\PaidAiPhpClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Evergrowth\\PaidAiPhpClientTests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "check": [
+            "@check:composer",
+            "@check:cs",
+            "@check:stan",
+            "@check:phpunit"
+        ],
+        "check:composer": "composer validate --no-check-all --strict --no-interaction",
+        "check:cs": "vendor/bin/phpcs",
+        "check:phpunit": "vendor/bin/phpunit",
+        "check:stan": "vendor/bin/phpstan analyze"
+    }
+}

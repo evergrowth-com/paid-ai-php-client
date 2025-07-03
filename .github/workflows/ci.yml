@@ -1,0 +1,60 @@
+name: CI
+
+on:
+    workflow_dispatch:
+    pull_request:
+
+defaults:
+    run:
+        shell: bash
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
+env:
+    COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+
+jobs:
+    tests:
+        name: PHP ${{ matrix.php }} (${{matrix.dependencies}})
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.draft == false
+        timeout-minutes: 5
+
+        strategy:
+            matrix:
+                php: ['8.3', '8.4']
+                dependencies: ['lowest', 'highest']
+            fail-fast: true
+
+        steps:
+            -   name: Checkout
+                uses: Actions/checkout@v4
+
+            -   name: Install PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    coverage: none
+                    ini-values: date.timezone=UTC
+                    php-version: ${{ matrix.php }}
+                    tools: cs2pr
+
+            -   name: Install composer dependencies
+                uses: ramsey/composer-install@v3
+                with:
+                    dependency-versions: ${{ matrix.dependencies }}
+
+            -   name: Composer validate
+                run: composer validate --no-check-all --strict --no-interaction
+
+            -   name: Code sniffer
+                run: vendor/bin/phpcs -q --no-colors --no-cache --report=checkstyle | cs2pr
+
+            -   name: PHPStan
+                run: |
+                    vendor/bin/phpstan clear-result-cache
+                    vendor/bin/phpstan analyse --no-progress --memory-limit=1G --error-format=checkstyle | cs2pr
+
+            -   name: PHPUnit
+                run: vendor/bin/phpunit
