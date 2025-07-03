@@ -20,7 +20,6 @@
     failOnNotice="true"
     failOnPhpunitDeprecation="true"
     failOnPhpunitNotice="true"
-    failOnPhpunitWarning="true"
     failOnRisky="true"
     failOnWarning="true"
     stopOnError="true"
