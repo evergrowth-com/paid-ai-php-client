@@ -58,3 +58,20 @@ jobs:
 
             -   name: PHPUnit
                 run: vendor/bin/phpunit
+
+    # Job is necessary for configuring GitHub's required status check
+    tests-results:
+        name: Tests results
+        runs-on: ubuntu-latest
+        if: always()
+        timeout-minutes: 5
+        needs: [tests]
+
+        steps:
+            -   run: exit 1
+                if: >-
+                    ${{
+                         contains(needs.*.result, 'failure')
+                      || contains(needs.*.result, 'cancelled')
+                      || contains(needs.*.result, 'skipped')
+                    }}
