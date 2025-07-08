@@ -7,6 +7,7 @@ namespace Evergrowth\PaidAiPhpClient;
 use Evergrowth\PaidAiPhpClient\Exception\PaidAiPhpClientException;
 use Evergrowth\PaidAiPhpClient\Model\Signal;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\RetryableHttpClient;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -30,7 +31,10 @@ final readonly class PaidAiApiClient implements PaidAiApiClientInterface
      */
     public static function new(string $apiKey): PaidAiApiClient
     {
-        return new self(HttpCLient::create(), $apiKey);
+        return new self(
+            new RetryableHttpClient(HttpCLient::create()),
+            $apiKey,
+        );
     }
 
     /**
