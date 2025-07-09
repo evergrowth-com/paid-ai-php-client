@@ -29,10 +29,12 @@ final readonly class PaidAiApiClient implements PaidAiApiClientInterface
     /**
      * @param non-empty-string $apiKey
      */
-    public static function new(string $apiKey): PaidAiApiClient
-    {
+    public static function new(
+        string $apiKey,
+        ?HttpClientInterface $httpClient = null,
+    ): PaidAiApiClient {
         return new self(
-            new RetryableHttpClient(HttpCLient::create()),
+            new RetryableHttpClient($httpClient ?? HttpClient::create()),
             $apiKey,
         );
     }
