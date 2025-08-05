@@ -4,20 +4,6 @@
 
 ## Installation
 
-Add repository config to the application's composer.json file:
-
-```json
-{
-    // ...
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/evergrowth-com/paid-ai-php-client"
-        }
-    ]
-}
-```
-
 Run: `composer require evergrowth/paid-ai-php-client`
 
 ## Usage
@@ -29,7 +15,36 @@ Create a client using api key:
 use Evergrowth\PaidAiPhpClient\PaidAiApiClient;
 use Evergrowth\PaidAiPhpClient\PaidAiApiClientInterface;
 
+/** @var PaidAiApiClientInterface $client */
 $client = PaidAiApiClient::new('secret-api-key');
+```
 
-assert($client instanceof PaidAiApiClientInterface);
+Push the signals to paid.ai:
+```php
+<?php
+
+use Evergrowth\PaidAiPhpClient\Model\Signal;
+
+$signals = [
+    new Signal('event1', 'agent1', 'customerX', ['additional metadata']),
+    new Signal('event2', 'agent2', 'customerX', ['additional metadata']),
+];
+$client->flush($signals);
+```
+
+Pushing signals with predefined agents:
+```php
+<?php
+
+use Evergrowth\PaidAiPhpClient\Model\Signal;
+use Evergrowth\PaidAiPhpClient\Model\AgentEnum;
+
+$signals = [
+    Signal::fromAgent(
+        AgentEnum::ACCOUNT_QUALIFICATION,
+        'customerX',
+        ['additional metadata'],
+    ),
+];
+$client->flush($signals);
 ```
