@@ -34,7 +34,10 @@ final readonly class PaidAiApiClient implements PaidAiApiClientInterface
         ?HttpClientInterface $httpClient = null,
     ): PaidAiApiClient {
         return new self(
-            new RetryableHttpClient($httpClient ?? HttpClient::create()),
+            new RetryableHttpClient(
+                client: $httpClient ?? HttpClient::create(),
+                maxRetries: 3,
+            ),
             $apiKey,
         );
     }
