@@ -7,7 +7,12 @@ namespace Evergrowth\PaidAiPhpClient\Model;
 enum AgentEnum
 {
     case ACCOUNT_PLANNING;
-    case ACCOUNT_QUALIFICATION;
+    case ACCOUNT_QUALIFICATION_CHAT_GPT_41;
+    case ACCOUNT_QUALIFICATION_CHAT_GPT_41_MINI;
+    case ACCOUNT_QUALIFICATION_CHAT_GPT_4o;
+    case ACCOUNT_QUALIFICATION_CHAT_GPT_4o_MINI;
+    case ACCOUNT_QUALIFICATION_GEMINI_25_PRO;
+    case ACCOUNT_QUALIFICATION_SONAR_REASONING_PRO;
     case ACCOUNT_RESEARCH_CHAT_GPT_41;
     case ACCOUNT_RESEARCH_CHAT_GPT_41_MINI;
     case ACCOUNT_RESEARCH_CHAT_GPT_4o;
@@ -18,7 +23,8 @@ enum AgentEnum
     case CONTACT_QUALIFICATION;
     case DIGITAL_TWIN;
     case DIGITAL_TWIN_CONVERSATION;
-    case PHONE_EMAIL_FINDER;
+    case EMAIL_FINDER;
+    case PHONE_FINDER;
     case PLAY_GENERATION;
     case PLAY_TEMPLATE_GENERATION;
     case ROLEPLAY;
@@ -31,7 +37,12 @@ enum AgentEnum
     {
         return match ($this) {
             self::ACCOUNT_PLANNING => 'generated_account_plan',
-            self::ACCOUNT_QUALIFICATION => 'qualified_account',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_41 => 'found_data_point_(chatgpt_4.1)',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_41_MINI => 'found_data_point_(chatgpt_4.1_mini)',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_4o => 'found_data_point_(chatgpt_4o)',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_4o_MINI => 'found_data_point_(chatgpt_4o_mini)',
+            self::ACCOUNT_QUALIFICATION_GEMINI_25_PRO => 'found_data_point_(gemini_2.5_pro)',
+            self::ACCOUNT_QUALIFICATION_SONAR_REASONING_PRO => 'found_data_point_(sonar_reasoning_pro)',
             self::ACCOUNT_RESEARCH_CHAT_GPT_41 => 'found_data_point_(chatgpt_4.1)',
             self::ACCOUNT_RESEARCH_CHAT_GPT_41_MINI => 'found_data_point_(chatgpt_4.1_mini)',
             self::ACCOUNT_RESEARCH_CHAT_GPT_4o => 'found_data_point_(chatgpt_4o)',
@@ -42,7 +53,8 @@ enum AgentEnum
             self::CONTACT_QUALIFICATION => 'qualified_contact',
             self::DIGITAL_TWIN => 'generated_digital_twin',
             self::DIGITAL_TWIN_CONVERSATION => 'message_received',
-            self::PHONE_EMAIL_FINDER => 'contact_enriched',
+            self::EMAIL_FINDER => 'found_email',
+            self::PHONE_FINDER => 'found_phone',
             self::PLAY_GENERATION => 'generated_play',
             self::PLAY_TEMPLATE_GENERATION => 'template_generated',
             self::ROLEPLAY => 'message_received',
@@ -57,7 +69,12 @@ enum AgentEnum
     {
         return match ($this) {
             self::ACCOUNT_PLANNING => '688d22c8-0b70-4bb5-99fb-34863394e749',
-            self::ACCOUNT_QUALIFICATION => '482cebb7-c8ea-4c25-8735-4d592e22713a',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_41 => '482cebb7-c8ea-4c25-8735-4d592e22713a',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_41_MINI => '482cebb7-c8ea-4c25-8735-4d592e22713a',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_4o => '482cebb7-c8ea-4c25-8735-4d592e22713a',
+            self::ACCOUNT_QUALIFICATION_CHAT_GPT_4o_MINI => '482cebb7-c8ea-4c25-8735-4d592e22713a',
+            self::ACCOUNT_QUALIFICATION_GEMINI_25_PRO => '482cebb7-c8ea-4c25-8735-4d592e22713a',
+            self::ACCOUNT_QUALIFICATION_SONAR_REASONING_PRO => '482cebb7-c8ea-4c25-8735-4d592e22713a',
             self::ACCOUNT_RESEARCH_CHAT_GPT_41 => '668f2f94-2552-4f6b-b10f-8a9f14371f69',
             self::ACCOUNT_RESEARCH_CHAT_GPT_41_MINI => '668f2f94-2552-4f6b-b10f-8a9f14371f69',
             self::ACCOUNT_RESEARCH_CHAT_GPT_4o => '668f2f94-2552-4f6b-b10f-8a9f14371f69',
@@ -68,7 +85,8 @@ enum AgentEnum
             self::CONTACT_QUALIFICATION => 'cf5209d9-5f04-4377-a671-ab465e3a1011',
             self::DIGITAL_TWIN => 'f5ba9064-c2d1-49b5-960a-057c4c0d6a47',
             self::DIGITAL_TWIN_CONVERSATION => '8dedaf24-fed1-4900-9e61-6d584a004e64',
-            self::PHONE_EMAIL_FINDER => '30b68bbc-ba07-4228-9554-6a12f98af022',
+            self::EMAIL_FINDER => '30b68bbc-ba07-4228-9554-6a12f98af022',
+            self::PHONE_FINDER => '30b68bbc-ba07-4228-9554-6a12f98af022',
             self::PLAY_GENERATION => 'bb888a31-2a49-4da8-b3f5-66eb8bc86836',
             self::PLAY_TEMPLATE_GENERATION => '0cda34a6-0d40-49b8-a6d1-647d348e4385',
             self::ROLEPLAY => 'f804d9c2-26fc-4136-b2fb-430d74e5a606',
